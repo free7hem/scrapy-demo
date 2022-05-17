@@ -1,4 +1,5 @@
 import scrapy
+import uuid
 
 
 class MySpiderSpider(scrapy.Spider):
@@ -21,7 +22,8 @@ class MySpiderSpider(scrapy.Spider):
                 'name': product.css('a.product-item-link::text').get(),
                 'price': price,
                 'link': product.css('a.product-item-link').attrib['href'],
-                'img': img
+                'img': img,
+                'id': str(uuid.uuid4())
             }
         
         next_page = response.css('a.next.action').attrib['href']
